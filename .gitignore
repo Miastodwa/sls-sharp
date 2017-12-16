@@ -1,5 +1,7 @@
+*.zip
 node_modules
-.env
-.webpack
 .serverless
-.env*
+.idea
+.webpack
+.envrc
+.build
