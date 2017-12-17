@@ -4,15 +4,13 @@
 		"build:sharp:local": "rm -rf sharp-local && yarn remove sharp && yarn add sharp && cd node_modules/ && cp -a sharp/. ../sharp-local",
 		"build:sharp:lambda": "yarn remove sharp && yarn add sharp --ignore-scripts && yarn docker:sharp:lambda",
 		"build:sharp": "yarn build:sharp:local && yarn build:sharp:lambda",
-
-		"deploy:env": "export SHARP='sharp' && sls deploy --stage $NODE_ENV",
+		"deploy:env": "export SHARP=lambda && sls deploy --stage $NODE_ENV",
 		"deploy": "export NODE_ENV=dev && yarn deploy:env",
 		"deploy:production": "export NODE_ENV=production && yarn deploy:env",
 		"deploy:stage": "export NODE_ENV=stage && yarn deploy:env",
-
-		"serve": "export SHARP='../../sharp-local' && serverless offline start",
-		"local:test": "export SHARP='../../sharp-local' && sls invoke local -f test  -p ../fixtures/event.json",
-		"watch:test": "export SHARP='../../sharp-local' && sls invoke local --watch -f test  -p ../fixtures/event.json"
+		"serve": "export SHARP=local && serverless offline start",
+		"local:test": "export SHARP=local && sls invoke local -f test  -p ../fixtures/event.json",
+		"watch:test": "export SHARP=local && sls invoke local --watch -f test  -p ../fixtures/event.json"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "^0.0.19",

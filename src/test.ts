@@ -1,16 +1,17 @@
 import * as AWS from 'aws-sdk'
 
-const sharpSrc = process.env.SHARP || 'sharp'
-const sharp = require(sharpSrc)
-
-const versions = sharp.versions
+const sharp = process.env.SHARP === 'local' ? require('../../sharp-local') : require('sharp')
 
 console.log(process.env.SHARP)
 
-export default async function (event: object, context, callback) {
+export default async function (event, context, callback) {
 	const response = {
 		statusCode: 200,
-		body: JSON.stringify(versions),
+		body: JSON.stringify({
+			sharp: sharp.versions,
+			query: event.queryStringParameters,
+			path: event.pathParameters
+		}),
 	}
 
 	callback(null, response)

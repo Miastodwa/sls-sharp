@@ -8,6 +8,7 @@ provider:
 plugins:
     - serverless-plugin-typescript
     - serverless-apigwy-binary
+    - serverless-offline
 
 package:
     exclude:
