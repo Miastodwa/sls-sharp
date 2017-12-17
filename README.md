@@ -2,7 +2,7 @@
 
 # sls-sharp
 
-Serverless Lambda function for on-the-fly image resing and processing in your AWS bucket. Using awsome sharp library.
+Serverless Lambda function for on-the-fly image resizing and processing in your AWS bucket. Using awsome sharp library.
 
 ## Installation
 ```
