@@ -1,9 +1,13 @@
 import * as AWS from 'aws-sdk'
-const sharp = require('sharp')
+
+const sharpSrc = process.env.SHARP || 'sharp'
+const sharp = require(sharpSrc)
 
 const versions = sharp.versions
 
-export default function (event, context, callback) {
+console.log(process.env.SHARP)
+
+export default async function (event: object, context, callback) {
 	const response = {
 		statusCode: 200,
 		body: JSON.stringify(versions),

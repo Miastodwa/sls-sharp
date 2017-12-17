@@ -1,24 +1,26 @@
 {
 	"scripts": {
-		"build:sharp": "docker-compose run --rm serverless npm rebuild",
-		"pre:deploy": "yarn remove sharp && yarn add sharp --ignore-scripts && yarn build:sharp",
-		"post:deploy": "yarn remove sharp && yarn add sharp",
-		"deploy:env": "sls deploy --stage $NODE_ENV",
+		"docker:sharp:lambda": "docker-compose run --rm serverless npm rebuild",
+		"build:sharp:local": "rm -rf sharp-local && yarn remove sharp && yarn add sharp && cd node_modules/ && cp -a sharp/. ../sharp-local",
+		"build:sharp:lambda": "yarn remove sharp && yarn add sharp --ignore-scripts && yarn docker:sharp:lambda",
+		"build:sharp": "yarn build:sharp:local && yarn build:sharp:lambda",
+
+		"deploy:env": "export SHARP='sharp' && sls deploy --stage $NODE_ENV",
 		"deploy": "export NODE_ENV=dev && yarn deploy:env",
 		"deploy:production": "export NODE_ENV=production && yarn deploy:env",
 		"deploy:stage": "export NODE_ENV=stage && yarn deploy:env",
-		"serve": "serverless offline start",
-		"local:test": "sls invoke local -f test -p fixtures/event.json",
-		"watch:test": "sls invoke local --watch -f test -p fixtures/event.json"
-	},
 
+		"serve": "export SHARP='../../sharp-local' && serverless offline start",
+		"local:test": "export SHARP='../../sharp-local' && sls invoke local -f test  -p ../fixtures/event.json",
+		"watch:test": "export SHARP='../../sharp-local' && sls invoke local --watch -f test  -p ../fixtures/event.json"
+	},
 	"devDependencies": {
 		"@types/aws-lambda": "^0.0.19",
 		"@types/node": "^8.0.16",
 		"husky": "^0.14.3",
 		"serverless-apigwy-binary": "^0.1.0",
-		"serverless-plugin-typescript": "^1.0.0",
-		"serverless-offline": "^3.16.0"
+		"serverless-offline": "^3.16.0",
+		"serverless-plugin-typescript": "^1.0.0"
 	},
 	"dependencies": {
 		"aws-sdk": "^2.7.27",

@@ -10,7 +10,8 @@ plugins:
     - serverless-apigwy-binary
 
 package:
-    excludeDevDependencies: false
+    exclude:
+        - sharp-local
 
 functions:
 
