@@ -2,7 +2,5 @@
 node_modules
 sharp-local
 .serverless
-.idea
-.webpack
 .envrc
 .build
