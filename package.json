@@ -22,6 +22,9 @@
 	},
 	"dependencies": {
 		"aws-sdk": "^2.7.27",
-		"sharp": "^0.18.4"
+		"aws-sdk-promise": "^0.0.2",
+		"qs": "^6.5.1",
+		"sharp": "^0.18.4",
+		"shorthash": "^0.0.2"
 	}
 }
